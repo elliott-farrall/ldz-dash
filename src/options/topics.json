@@ -1,0 +1,67 @@
+{
+  "AS&D": {
+    "Assessment process/task": [
+      "Assignment planning",
+      "Interpreting criteria",
+      "Interpreting feedback",
+      "Interpreting Turnitin (similarity checker) reports",
+      "Choosing a topic/finding focus (dissertations)",
+      "Effective use of gen AI (Artificial Intelligence)",
+      "Finding information (SurreySearch, Databases, Internet)",
+      "Referencing",
+      "Search strategies (e.g. Boolean, truncation, index searching etc.)",
+      "Selecting appropriate evidence",
+      "Literature surveys and systematic reviews (including PRISMA)",
+      "Managing information (including referencing software)"
+    ],
+    "Assessment": [
+      "Annotated bibliography",
+      "Article review",
+      "Presentations, Posters and digital assessment (videos etc.)",
+      "Research proposal",
+      "Reflective writing",
+      "Writing (reports, essays, etc.), incl. paraphrasing, flow, structure, clarity)",
+      "Writing (integrating evidence)",
+      "Literature review"
+    ],
+    "Academic Skills": [
+      "Academic integrity referral",
+      "Group or teamworking, peer-based learning",
+      "Planning and organising time",
+      "Reading and note-making strategies",
+      "Research design / methods/ology",
+      "Revision and exam strategies"
+    ],
+    "Critical thinking": [
+      "Analysis/Writing (synthesis, evaluation, argument, position, voice)",
+      "Evaluating information/engaging with literature",
+      "Using evaluative judgement (making sense, making meaning)"
+    ],
+    "Learning journey": [
+      "Service introduction for new or returning students",
+      "Personal statements or applications",
+      "Transition to university/UK academic setting/PTY/study levels"
+    ]
+  },
+  "MASA": {
+    "Maths": [
+      "Algebra",
+      "Calculus",
+      "Complex Numbers",
+      "Numeracy",
+      "Trigonometry",
+      "Other"
+    ],
+    "Statistics": [
+      "Data Collection/Handling",
+      "Data Presentation/Writing Up Results",
+      "Statistical Testing",
+      "Statistical Theory",
+      "Probability",
+      "Sample Size Calculations",
+      "Understanding Research Papers",
+      "Other"
+    ],
+    "Softare": ["Excel", "GraphPad", "Jamovi", "Matlab", "R", "SPSS", "Other"]
+  }
+}

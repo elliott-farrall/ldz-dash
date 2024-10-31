@@ -1,0 +1,12 @@
+{%extends "_base.html" %} {% block body %}
+<h1>Login Page</h1>
+<form method="POST" action="{{ url_for('.login') }}">
+  <label>Username:</label>
+  <input name="username" type="text" required />
+
+  <label>Password:</label>
+  <input name="password" type="password" required />
+
+  <input value="Login" type="submit" />
+</form>
+{% include "flash.html" %} {% endblock %}

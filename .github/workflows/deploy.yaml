@@ -1,0 +1,34 @@
+name: Deploy
+
+on:
+  push:
+    branches: [production, testing]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: ${{ github.ref_name }}
+      url: ${{ vars.URL}}
+
+    steps:
+      - name: Trigger Update
+        run: |
+          curl -f -X POST \
+            -H "Content-Type: application/json" \
+            -H "X-Secret-Key: ${{ secrets.SECRET_KEY }}" \
+            -H "X-WSGI-Path: ${{ vars.WSGI_PATH }}" \
+            -d "{'ref': '${{ github.ref }}', 'after': '${{ github.sha }}'}" \
+          "${{ vars.URL }}/api/update"
+
+      - name: Wait
+        run: sleep 10
+
+      - name: Check Update
+        run: |
+          VERSION=$(curl -f "${{ vars.URL }}/api/version")
+          if [[ "$VERSION" != "${{ github.sha }}" ]]; then
+            echo "Update did not complete successfully"
+            exit 1
+          fi

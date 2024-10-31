@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "ldz-dash"
+version = "1.0"
+description = "App for use in the University of Surrey's LDZ"
+authors = ["ElliottSullingeFarrall <elliott.chalford@gmail.com>"]
+readme = "README.md"
+repository = "https://github.com/ElliottSullingeFarrall/ldz-dash"
+packages = [{ include = "src", to = "ldz" }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-dotenv = "^1.0.1"
+Flask = "^3.0.1"
+Flask-SQLAlchemy = "^3.1.1"
+Flask-Login = "^0.6.3"
+pandas = "^2.2.0"
+pandas-stubs = "^2.2.2.240807"
+gitpython = "^3.1.41"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

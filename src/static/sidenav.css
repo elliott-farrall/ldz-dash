@@ -1,0 +1,84 @@
+.sidenav {
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+
+  overflow-x: hidden;
+
+  width: 0;
+  height: 100%;
+  padding-top: 60px;
+
+  transition: 0.5s;
+
+  background-color: var(--secondary);
+}
+
+.sidenav-open {
+  width: 200px;
+}
+
+.sidenav .button {
+  font-size: 36px;
+
+  position: absolute;
+  top: 0;
+  right: 25px;
+
+  margin-left: 50px;
+
+  color: var(--text_secondary_inactive);
+}
+
+.sidenav .item {
+  font-size: 25px;
+  line-height: 50px;
+
+  padding: 10px 8px 10px 32px;
+
+  transition: 0.3s;
+  text-decoration: none;
+
+  color: var(--text_secondary_inactive);
+}
+
+.sidenav .sep {
+  font-size: 10px;
+
+  position: relative;
+
+  display: flex;
+
+  padding: 5px;
+
+  color: var(--text_secondary_inactive);
+}
+
+.sidenav .sep::before,
+.sidenav .sep::after {
+  align-self: center;
+
+  height: 1px;
+
+  content: "";
+
+  background-color: var(--text_secondary_inactive);
+}
+
+.sidenav .sep::before {
+  width: 10px;
+  margin-right: 5px;
+}
+
+.sidenav .sep::after {
+  width: 100%;
+  margin-left: 5px;
+}
+
+.sidenav .button:hover,
+.sidenav .item:hover {
+  cursor: pointer;
+
+  color: var(--text_secondary_active);
+}

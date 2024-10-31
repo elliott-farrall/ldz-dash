@@ -1,0 +1,44 @@
+:root {
+  --background: #ffffff;
+
+  --primary: #333333;
+  --secondary: #111111;
+  --tertiary: #f4f4f4;
+
+  --text_primary_active: #818181;
+  --text_primary_inactive: #818181;
+  --text_secondary_active: #f4f4f4;
+  --text_secondary_inactive: #818181;
+  --text_tertiary: #f4f4f4;
+  --text_body: #111111;
+
+  --button_primary_active: #0056b3;
+  --button_primary_inactive: #007bff;
+  --button_secondary_active: #111111;
+  --button_secondary_inactive: #818181;
+  --error: red;
+
+  --shadow: rgba(0, 0, 0, 0.2);
+}
+:root::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background);
+  padding: 0;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#main {
+  padding-top: 50px;
+}
+
+h1 {
+  margin-top: 20px;
+  color: var(--text_body);
+}

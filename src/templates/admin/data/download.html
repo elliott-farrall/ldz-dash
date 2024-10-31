@@ -1,0 +1,87 @@
+{% extends "_layout.html" %} {% block main %}
+<h1>Download Data</h1>
+<form method="POST" action="{{ url_for('.download') }}" onsubmit="redirect()">
+  <div class="row">
+    <div>
+      <label>Month:</label>
+      <input name="month" type="month" required />
+    </div>
+    <div>
+      <label>Type:</label>
+      <select name="category:subcategory" required>
+        {% for category in categories %}
+        <optgroup label="{{ category|capitalize }}">
+          {% for subcategory in categories[category] %}
+          <option value="{{ category }}:{{ subcategory }}">
+            {{ subcategory|upper }}
+          </option>
+          {% endfor %}
+        </optgroup>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div>
+      <label>Users:</label>
+      <select name="users" id="users" multiple required></select>
+    </div>
+  </div>
+
+  <input value="Download" type="submit" />
+</form>
+
+<script>
+  const monthSelect = document.querySelector("input[name='month']");
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = ("0" + (date.getMonth() + 1)).slice(-2);
+  monthSelect.value = `${year}-${month}`;
+
+  $("#users").multiselect({
+    includeSelectAllOption: true,
+    selectAllText: "Select All",
+    nonSelectedText: "None Selected",
+    nSelectedText: "Selected",
+    allSelectedText: "All Selected",
+  });
+
+  function redirect() {
+    setTimeout(() => {
+      window.location.href = "{{ url_for('root.home.index') }}";
+    }, 50); // delay (ms) | Local: > 25 | Production: > 50
+  }
+
+  const typeSelect = document.querySelector(
+    "select[name='category:subcategory']",
+  );
+
+  function dates() {
+    const [category, subcategory] = typeSelect.value.split(":");
+
+    let url =
+      "{{ url_for('.dates', category='category', subcategory='subcategory') }}";
+    url = url.replace("category", category);
+    url = url.replace("subcategory", subcategory);
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        const usersSelect = document.getElementById("users");
+        usersSelect.innerHTML = ""; // Clear existing options
+
+        Object.keys(data).forEach((username) => {
+          const option = document.createElement("option");
+          option.value = username;
+          option.textContent = username + " (" + data[username] + ")";
+          usersSelect.appendChild(option);
+        });
+
+        $("#users").multiselect("rebuild");
+      })
+      .catch((error) => console.error("Error:", error));
+  }
+  typeSelect.addEventListener("change", dates);
+  document.addEventListener("DOMContentLoaded", dates);
+</script>
+{% endblock %}

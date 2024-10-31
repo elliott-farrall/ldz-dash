@@ -1,0 +1,15 @@
+{% extends "_layout.html" %} {% block main %}
+<h1>Add User</h1>
+<form method="POST" action="{{ url_for('.add') }}">
+  <label>Username:</label>
+  <input name="username" type="text" required />
+
+  <label>Password:</label>
+  <input name="password" type="password" required />
+
+  <label>Admin:</label>
+  <input name="admin" type="checkbox" />
+
+  <input value="Add" type="submit" />
+</form>
+{% include "flash.html" %} {% endblock %}

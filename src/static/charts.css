@@ -1,0 +1,47 @@
+.chart-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-container .select input,
+.chart-container .select select {
+  float: right;
+
+  margin: 5px;
+  padding: 10px;
+
+  border: 1px solid;
+  border-radius: 5px;
+  background-color: var(--background);
+}
+
+.chart-container .charts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chart-container .chart {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+
+  width: calc(100% - 10px);
+  margin: auto;
+
+  transition: opacity 0.3s;
+
+  aspect-ratio: 1;
+}
+
+/* Media queries for wider screens */
+@media (min-width: 800px) {
+  .chart-container .chart {
+    width: calc(50% - 10px); /* Two charts per row */
+  }
+}
+@media (min-width: 1600px) {
+  .chart-container .chart {
+    width: calc(25% - 10px); /* Four charts per row */
+  }
+}

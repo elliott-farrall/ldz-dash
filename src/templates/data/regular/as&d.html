@@ -1,0 +1,148 @@
+{% extends "data/_form.html" %} {% block form %}
+<div class="row">
+  <div>
+    <label>Date:</label>
+    <input name="Date" type="date" required />
+  </div>
+  <div>
+    <label>Start Time:</label>
+    <input name="In" type="time" required />
+  </div>
+  <div>
+    <label>End Time:</label>
+    <input name="Out" type="time" required />
+  </div>
+</div>
+<div class="row">
+  <div>
+    <label>Department:</label>
+    <select name="Department" required>
+      <option style="display: none" disabled selected value></option>
+      {% for department in departments %}
+      <option value="{{ department }}">{{ department }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div>
+    <label>Level:</label>
+    <select name="Level" required>
+      <option style="display: none" disabled selected value></option>
+      {% for level in levels %}
+      <option value="{{ level }}">{{ level }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div>
+    <label>Query 1:</label>
+    <select name="Query 1" id="query1" required>
+      <option style="display: none" disabled selected value></option>
+      {% for category in topics["AS&D"] %}
+      <optgroup label="{{ category }}">
+        {% for topic in topics["AS&D"][category] %}
+        <option value="{{ category }}: {{ topic }}">{{ topic }}</option>
+        {% endfor %}
+      </optgroup>
+      {% endfor %}
+    </select>
+  </div>
+  <div>
+    <label>Query 2:</label>
+    <select name="Query 2" id="query2" required>
+      <option value="N/A">N/A</option>
+      {% for category in topics["AS&D"] %}
+      <optgroup label="{{ category }}">
+        {% for topic in topics["AS&D"][category] %}
+        <option value="{{ category }}: {{ topic }}">{{ topic }}</option>
+        {% endfor %}
+      </optgroup>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div>
+    <label>Format:</label>
+    <select name="Format" required>
+      <option style="display: none" disabled selected value></option>
+      <option value="In Person">In Person</option>
+      <option value="Online">Online</option>
+    </select>
+  </div>
+  <div>
+    <label>Location:</label>
+    <select name="Location" required>
+      <option style="display: none" disabled selected value></option>
+      {% for location in locations %}
+      <option value="{{ location }}">{{ location }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div>
+    <label>Appointment Status:</label>
+    <select name="Appointment Status" required>
+      <option value="N/A">N/A</option>
+      <option value="Attended">Attended</option>
+      <option value="No Show">No Show</option>
+      <option value="Cancelled">Cancelled</option>
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div>
+    <label>Referrals:</label>
+    <select name="Referrals" id="referrals" multiple>
+      {% for referral in referrals %}
+      <option value="{{ referral }}">{{ referral }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div>
+    <label>No. of Students:</label>
+    <input name="Students" type="number" min="1" value="1" required />
+  </div>
+  <div>
+    <label>Project:</label>
+    <input name="Project" type="checkbox" />
+  </div>
+</div>
+<div class="row">
+  <div>
+    <label>Notes:</label>
+    <input name="Notes" id="notes" type="text" disabled />
+  </div>
+</div>
+
+<script>
+  $("#referrals").multiselect({
+    includeSelectAllOption: true,
+    selectAllText: "Select All",
+    nonSelectedText: "None Selected",
+    nSelectedText: "Selected",
+    allSelectedText: "All Selected",
+  });
+
+  const query1 = document.getElementById("query1");
+  const query2 = document.getElementById("query2");
+  const notes = document.getElementById("notes");
+  const matchStrings = [
+    "Referencing",
+    "Managing information (including referencing software)",
+  ];
+
+  function checkQueries() {
+    const matches = matchStrings.some(
+      (str) => query1.value.includes(str) || query2.value.includes(str),
+    );
+    notes.disabled = !matches;
+  }
+
+  query1.addEventListener("change", checkQueries);
+  query2.addEventListener("change", checkQueries);
+</script>
+{% endblock %}

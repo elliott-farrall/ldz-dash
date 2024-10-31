@@ -1,0 +1,15 @@
+{% extends "_layout.html" %} {% block main %}
+<h1>Change Password</h1>
+<form method="POST" action="{{ url_for('.settings') }}">
+  <label>Old Password:</label>
+  <input name="password_old" type="password" required />
+
+  <label>New Password:</label>
+  <input name="password_new" type="password" required />
+
+  <label>Confirm Password:</label>
+  <input name="password_check" type="password" required />
+
+  <input value="Change" type="submit" />
+</form>
+{% include "flash.html" %} {% endblock %}

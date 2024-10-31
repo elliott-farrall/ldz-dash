@@ -1,0 +1,20 @@
+table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 10px;
+
+  text-align: left;
+
+  border-bottom: 1px solid var(--text_secondary_inactive);
+}
+
+table tbody tr:hover {
+  cursor: pointer;
+
+  background-color: var(--text_primary_active);
+}

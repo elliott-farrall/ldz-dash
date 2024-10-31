@@ -1,0 +1,25 @@
+{
+  "version": "2.0.0",
+  "presentation": {
+    "echo": false,
+    "showReuseMessage": false,
+    "clear": true
+  },
+  "tasks": [
+    {
+      "label": "Test App",
+      "type": "shell",
+      "command": "wsgi/test.sh",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Install Config",
+      "type": "shell",
+      "command": "./install.sh"
+    }
+  ]
+}

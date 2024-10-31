@@ -1,0 +1,80 @@
+.topnav {
+  position: fixed;
+  z-index: 8;
+
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+
+  background-color: var(--primary);
+}
+
+.topnav > div {
+  display: flex;
+}
+
+.topnav .button {
+  font-size: 16px;
+
+  padding: 14px 16px;
+
+  text-align: center;
+  text-decoration: none;
+
+  color: var(--text_primary_inactive);
+}
+
+.topnav .menu {
+  position: relative;
+}
+
+.topnav .menu .button {
+  font-size: 16px;
+
+  box-sizing: border-box;
+  width: 100px;
+  height: 100%;
+  padding: 14px 0;
+
+  color: var(--text_primary_inactive);
+  border: none;
+  background-color: inherit;
+}
+
+.topnav .menu .content {
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  right: 0;
+
+  display: none;
+
+  width: 100px;
+
+  background-color: var(--primary);
+  box-shadow: 0px 8px 16px 0px var(--shadow);
+}
+
+.topnav .menu:hover .content {
+  display: block;
+}
+
+.topnav .menu .content .item {
+  display: block;
+
+  padding: 12px 16px;
+
+  text-align: left;
+  text-decoration: none;
+
+  color: var(--text_primary_inactive);
+}
+
+.topnav .button:hover,
+.topnav .menu:hover .button,
+.topnav .menu .content .item:hover {
+  cursor: pointer;
+
+  background-color: var(--background);
+}
