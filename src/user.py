@@ -132,6 +132,14 @@ class Users(SQLAlchemy):
         user.password = generate_password_hash(form["password_new"])
         self.session.commit()
 
+    def change_admin(self, idx: int) -> None:
+        user = self[idx]
+        if not user:
+            raise UserException("Invalid user!")
+
+        user.admin = not user.admin
+        self.session.commit()
+
 users = Users()
 
 if TYPE_CHECKING:
