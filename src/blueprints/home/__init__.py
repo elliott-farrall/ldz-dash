@@ -27,7 +27,14 @@ def charts(category: str, subcategory: str, year: int) -> View:
                 table = data.table[data.table["Date"].dt.year == year]
 
                 for month in chart_data:
-                    chart_data[month] += table.loc[table["Date"].dt.strftime("%b") == month].shape[0]
+                    month_table = table.loc[table["Date"].dt.strftime("%b") == month]
+                    if category == "embedded":
+                        chart_data[month] += month_table["Students Arrived"].sum()
+                    if category == "regular":
+                        chart_data[month] += month_table.loc[
+                            ~month_table["Attendance"].isin(["No Show", "Cancelled"]),
+                            "Students"
+                        ].sum()
 
     trace = {
         "x": list(chart_data.keys()),
