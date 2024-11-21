@@ -4,6 +4,7 @@ from os.path import join
 from flask import Blueprint, jsonify, render_template
 
 from src.data import Data
+from src.user import users
 from src.view import View, login_required
 
 TEMPLATES_DIR = "home"
@@ -20,12 +21,13 @@ def index() -> View:
 def charts(category: str, subcategory: str, year: int) -> View:
     chart_data = dict.fromkeys(month_abbr[1:], 0)
 
-    with Data(category, subcategory) as data:
-        if not data.empty:
-            table = data.table[data.table["Date"].dt.year == year]
+    for user in users:
+        with Data(category, subcategory, username=user.username) as data:
+            if not data.empty:
+                table = data.table[data.table["Date"].dt.year == year]
 
-            for month in chart_data:
-                chart_data[month] = table.loc[table["Date"].dt.strftime("%b") == month].shape[0]
+                for month in chart_data:
+                    chart_data[month] += table.loc[table["Date"].dt.strftime("%b") == month].shape[0]
 
     trace = {
         "x": list(chart_data.keys()),

@@ -65,6 +65,9 @@ class Users(SQLAlchemy):
     def __len__(self) -> int:
         return User.query.count()
 
+    def __iter__(self):
+        return iter(User.query.all())
+
     @property
     def empty(self) -> bool:
         return not len(self)
