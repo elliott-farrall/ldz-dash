@@ -40,7 +40,7 @@ class Data:
             self.path.parent.mkdir(parents=True, exist_ok=True)
             self._table = DataFrame()
 
-        if not self.empty:
+        if "Date" in self._table.columns:
             self._table["Date"] = to_datetime(self._table["Date"])
 
     def __enter__(self) -> Data:
