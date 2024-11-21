@@ -23,18 +23,16 @@ def charts(category: str, subcategory: str, year: int) -> View:
 
     for user in users:
         with Data(category, subcategory, username=user.username) as data:
-            if not data.empty:
-                table = data.table[data.table["Date"].dt.year == year]
+            if data.empty:
+                continue
+            table_year = data.table[data.table["Date"].dt.year == year]
 
-                for month in chart_data:
-                    month_table = table.loc[table["Date"].dt.strftime("%b") == month]
-                    if category == "embedded":
-                        chart_data[month] += month_table["Students Arrived"].sum()
-                    if category == "regular":
-                        chart_data[month] += month_table.loc[
-                            ~month_table["Attendance"].isin(["No Show", "Cancelled"]),
-                            "Students"
-                        ].sum()
+            for month in chart_data:
+                month_table = table_year.loc[table_year["Date"].dt.strftime("%b") == month]
+                if category == "embedded":
+                    chart_data[month] += int(month_table["Students Arrived"].sum())
+                elif category == "regular":
+                    chart_data[month] += int(month_table.loc[~month_table["Attendance"].isin(["No Show", "Cancelled"]), "Students"].sum())
 
     trace = {
         "x": list(chart_data.keys()),
