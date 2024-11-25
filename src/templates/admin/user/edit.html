@@ -9,11 +9,6 @@
 
   <input value="Change" type="submit" />
   <input
-    value="{% if admin %}Demote{% else %}Promote{% endif %}"
-    type="button"
-    onclick='window.location="{{ url_for('.change', idx=idx) }}"'
-  />
-  <input
     value="Remove"
     type="button"
     onclick='window.location="{{ url_for('.remove', idx=idx) }}"'

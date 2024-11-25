@@ -42,14 +42,7 @@ def edit(idx: int) -> View:
     if user == current_user:
         return redirect(url_for(".view"))
 
-    return render_template(join(TEMPLATES_DIR, "edit.html"), idx=idx, admin=user.admin)
-
-@user.route("/change/<int:idx>", methods=["GET", "POST"])
-@admin_required
-@confirm_required
-def change(idx: int) -> View:
-    users.change_admin(idx)
-    return redirect(url_for(".view"))
+    return render_template(join(TEMPLATES_DIR, "edit.html"), idx=idx)
 
 @user.route("/remove/<int:idx>", methods=["GET", "POST"])
 @admin_required
