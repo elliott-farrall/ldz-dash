@@ -82,12 +82,8 @@
 </div>
 <div class="row">
   <div>
-    <label>Appointment:</label>
-    <input name="Appointment" id="appointment" type="checkbox" />
-  </div>
-  <div>
-    <label>Attendance:</label>
-    <select name="Attendance" id="attendance" required disabled>
+    <label>Appointment Status:</label>
+    <select name="Appointment Status" required>
       <option value="N/A">N/A</option>
       <option value="Attended">Attended</option>
       <option value="No Show">No Show</option>
@@ -111,21 +107,4 @@
     <input name="Notes" type="text" />
   </div>
 </div>
-
-<script>
-  const appointmentCheckbox = document.getElementById("appointment");
-  const attendanceDropdown = document.getElementById("attendance");
-
-  appointmentCheckbox.addEventListener("change", function() {
-    if (this.checked) {
-      attendanceDropdown.disabled = false;
-      attendanceDropdown.value = "Attended";
-      attendanceDropdown.querySelector('option[value="N/A"]').style.display = 'none';
-    } else {
-      attendanceDropdown.disabled = true;
-      attendanceDropdown.value = "N/A";
-      attendanceDropdown.querySelector('option[value="N/A"]').style.display = 'block';
-    }
-  });
-</script>
 {% endblock %}
