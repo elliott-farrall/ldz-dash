@@ -1,7 +1,4 @@
 {% extends "data/_form.html" %} {% block form %}
-<script>
-  const form = document.querySelector("form");
-</script>
 <div class="row">
   <div>
     <label>Date:</label>
@@ -101,78 +98,23 @@
 <div class="row selector">
   <div>
     <label>LDA</label>
-    <input name="LDA" type="hidden" value="No" id="lda_hidden" />
-    <input name="LDA" type="checkbox" value="Yes" id="lda" />
-    <script>
-      const lda = document.getElementById("lda");
-      const lda_hidden = document.getElementById("lda_hidden");
-
-      form.addEventListener('submit', () => {
-        if(lda.checked) {
-          lda_hidden.disabled = true;
-        };
-      });
-    </script>
+    <input name="LDA" type="checkbox" />
   </div>
   <div>
     <label>LDL</label>
-    <input name="LDL" type="hidden" value="No" id="ldl_hidden" />
-    <input name="LDL" type="checkbox" value="Yes" id="ldl" />
-    <script>
-      const ldl = document.getElementById("ldl");
-      const ldl_hidden = document.getElementById("ldl_hidden");
-
-      form.addEventListener('submit', () => {
-        if(ldl.checked) {
-          ldl_hidden.disabled = true;
-        };
-      });
-    </script>
+    <input name="LDL" type="checkbox" />
   </div>
   <div>
     <label>MASA</label>
-    <input name="MASA" type="hidden" value="No" id="masa_hidden" />
-    <input name="MASA" type="checkbox" value="Yes" id="masa" />
-    <script>
-      const masa = document.getElementById("masa");
-      const masa_hidden = document.getElementById("masa_hidden");
-
-      form.addEventListener('submit', () => {
-        if(masa.checked) {
-          masa_hidden.disabled = true;
-        };
-      });
-    </script>
+    <input name="MASA" type="checkbox" />
   </div>
   <div>
     <label>FY</label>
-    <input name="FY" type="hidden" value="No" id="fy_hidden" />
-    <input name="FY" type="checkbox" value="Yes" id="fy" />
-    <script>
-      const fy = document.getElementById("fy");
-      const fy_hidden = document.getElementById("fy_hidden");
-
-      form.addEventListener('submit', () => {
-        if(fy.checked) {
-          fy_hidden.disabled = true;
-        };
-      });
-    </script>
+    <input name="FY" type="checkbox" />
   </div>
   <div>
     <label>Acad</label>
-    <input name="Acad" type="hidden" value="No" id="acad_hidden" />
-    <input name="Acad" type="checkbox" values="Yes" id="acad" />
-    <script>
-      const acad = document.getElementById("acad");
-      const acad_hidden = document.getElementById("acad_hidden");
-
-      form.addEventListener('submit', () => {
-        if(acad.checked) {
-          acad_hidden.disabled = true;
-        };
-      });
-    </script>
+    <input name="Acad" type="checkbox" />
   </div>
 </div>
 <div class="row">

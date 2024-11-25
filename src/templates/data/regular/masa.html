@@ -1,7 +1,4 @@
 {% extends "data/_form.html" %} {% block form %}
-<script>
-  const form = document.querySelector("form");
-</script>
 <div class="row">
   <div>
     <label>Date:</label>
@@ -86,18 +83,7 @@
 <div class="row">
   <div>
     <label>Appointment:</label>
-    <input name="Appointment" type="hidden" value="No" id="appointment_hidden"/>
-    <input name="Appointment" type="checkbox" value="Yes" id="appointment" />
-    <script>
-      const appointment = document.getElementById("appointment");
-      const appointment_hidden = document.getElementById("appointment_hidden");
-
-      form.addEventListener('submit', () => {
-        if(appointment.checked) {
-          appointment_hidden.disabled = true;
-        };
-      });
-    </script>
+    <input name="Appointment" id="appointment" type="checkbox" />
   </div>
   <div>
     <label>Attendance:</label>
@@ -108,21 +94,6 @@
       <option value="Cancelled">Cancelled</option>
     </select>
   </div>
-  <script>
-    const attendance = document.getElementById("attendance");
-
-    appointment.addEventListener("change", () => {
-      if (appointment.checked) {
-        attendance.disabled = false;
-        attendance.value = "Attended";
-        attendance.querySelector('option[value="N/A"]').style.display = 'none';
-      } else {
-        attendance.disabled = true;
-        attendance.value = "N/A";
-        attendance.querySelector('option[value="N/A"]').style.display = 'block';
-      }
-    });
-  </script>
 </div>
 <div class="row">
   <div>
@@ -131,18 +102,7 @@
   </div>
   <div>
     <label>Project:</label>
-    <input name="Project" type="hidden" value="No" id="project_hidden" />
-    <input name="Project" type="checkbox" value="Yes" id="project" />
-    <script>
-      const project = document.getElementById("project");
-      const project_hidden = document.getElementById("project_hidden");
-
-      form.addEventListener('submit', () => {
-        if(project.checked) {
-          project_hidden.disabled = true;
-        };
-      });
-    </script>
+    <input name="Project" type="checkbox" />
   </div>
 </div>
 <div class="row">
@@ -151,4 +111,21 @@
     <input name="Notes" type="text" />
   </div>
 </div>
+
+<script>
+  const appointmentCheckbox = document.getElementById("appointment");
+  const attendanceDropdown = document.getElementById("attendance");
+
+  appointmentCheckbox.addEventListener("change", function() {
+    if (this.checked) {
+      attendanceDropdown.disabled = false;
+      attendanceDropdown.value = "Attended";
+      attendanceDropdown.querySelector('option[value="N/A"]').style.display = 'none';
+    } else {
+      attendanceDropdown.disabled = true;
+      attendanceDropdown.value = "N/A";
+      attendanceDropdown.querySelector('option[value="N/A"]').style.display = 'block';
+    }
+  });
+</script>
 {% endblock %}
