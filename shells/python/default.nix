@@ -17,6 +17,8 @@ mkShell {
     inotify-tools
     openssl
     (uwsgi.override { python3 = python310; plugins = [ "python3" ]; })
+
+    zip
   ];
 
   LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
