@@ -28,14 +28,38 @@
     </div>
   </div>
 
-  <input value="Download" type="submit" />
+  <input type="submit" value="Download" />
+</form>
+
+<h1>Backup & Restore</h1>
+<form method="POST" action="{{ url_for('.backup') }}" enctype="multipart/form-data">
+  <div class="row">
+    <div>
+      <label>Type:</label>
+      <select name="category:subcategory" required>
+        {% for category in categories %}
+        <optgroup label="{{ category|capitalize }}">
+          {% for subcategory in categories[category] %}
+          <option value="{{ category }}:{{ subcategory }}">
+            {{ subcategory|upper }}
+          </option>
+          {% endfor %}
+        </optgroup>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <input name="data-csv" type="file" accept=".csv" id="data-csv" style="display: none;" required />
+  <input type="submit" name="submit" value="Backup" />
+  <input type="submit" name="submit" value="Restore" onclick="document.getElementById('data-csv').click();" />
 </form>
 
 <script>
-  const monthSelect = document.querySelector("input[name='month']");
   const date = new Date();
   const year = date.getFullYear();
   const month = ("0" + (date.getMonth() + 1)).slice(-2);
+
+  const monthSelect = document.querySelector("input[name='month']");
   monthSelect.value = `${year}-${month}`;
 
   $("#users").multiselect({
@@ -83,5 +107,10 @@
   }
   typeSelect.addEventListener("change", dates);
   document.addEventListener("DOMContentLoaded", dates);
+
+  document.getElementById('data-csv').addEventListener('change', function() {
+    document.getElementById('restore-form').submit();
+  });
+
 </script>
 {% endblock %}

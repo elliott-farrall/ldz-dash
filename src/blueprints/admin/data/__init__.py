@@ -1,8 +1,9 @@
 from datetime import datetime
 from os.path import join
+from tempfile import NamedTemporaryFile
 
-from flask import Blueprint, Response, jsonify, render_template, request
-from pandas import concat
+from flask import Blueprint, Response, jsonify, render_template, request, redirect, url_for
+from pandas import DataFrame, concat, read_csv
 
 from src.data import Data
 from src.user import users
@@ -20,17 +21,51 @@ def download() -> View:
         category, subcategory = request.form["category:subcategory"].split(":")
         users = request.form.getlist("users")
 
-        table = concat([Data(category, subcategory, user).table for user in users], ignore_index=True)
+        table = concat([Data(category, subcategory, user).table.assign(User=user) for user in users], ignore_index=True)
         if not table.empty:
-            table = table.loc[
-                (table["Date"].dt.month == date.month) &
-                (table["Date"].dt.year == date.year)
-            ]
-            table.sort_values("Date", ascending=False, inplace=True)
+            if not request.form["all"]:
+                table = table.loc[
+                    (table["Date"].dt.month == date.month) &
+                    (table["Date"].dt.year == date.year)
+                ]
+        table.sort_values("Date", ascending=False, inplace=True)
 
         return Response(table.to_csv(index=False), mimetype="text/csv", headers={"Content-Disposition": "attachment;filename=data.csv"})
 
-    return render_template(join(TEMPLATES_DIR, "download.html"))
+    return render_template(join(TEMPLATES_DIR, "data.html"))
+
+@data.route("/backup", methods=["POST"])
+@admin_required
+def backup() -> View:
+    if request.method == "POST":
+        category, subcategory = request.form["category:subcategory"].split(":")
+
+        match request.form["submit"]:
+            case "Backup":
+                table = DataFrame()
+                for user in users.table["username"]:
+                    with Data(category, subcategory, user) as data:
+                        if not data.empty:
+                            user_table = data.table.copy()
+                            user_table.insert(0, "User", user)
+                            table = concat([table, user_table], ignore_index=True)
+
+                with NamedTemporaryFile(dir=".", suffix=".csv") as tmp:
+                    table.to_csv(tmp.name, index=False)
+                    return Response(tmp.read(), mimetype="text/csv", headers={"Content-Disposition": "attachment;filename=backup.csv"})
+            case "Restore":
+                file = request.files['data-csv']
+                with NamedTemporaryFile(dir=".", suffix=".csv") as tmp:
+                    file.save(tmp.name)
+                    table = read_csv(tmp.name)
+
+                for user in table['User'].unique():
+                    user_table = table[table['User'] == user].drop(columns=['User'])
+                    data = Data(category, subcategory, user)
+                    data._table = user_table
+                    data._table.to_csv(data.path, index=False)
+
+    return redirect(url_for(".download"))
 
 @data.route("/dates/<category>/<subcategory>")
 @admin_required
