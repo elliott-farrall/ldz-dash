@@ -1,6 +1,6 @@
 {% extends "_layout.html" %} {% block main %}
 <h1>Download Data</h1>
-<form method="POST" action="{{ url_for('.download') }}" onsubmit="redirect()">
+<form method="POST" action="{{ url_for('.download') }}">
   <div class="row">
     <div>
       <label>Month:</label>
@@ -49,9 +49,15 @@
       </select>
     </div>
   </div>
-  <input name="data-csv" type="file" accept=".csv" id="data-csv" style="display: none;" required />
-  <input type="submit" name="submit" value="Backup" />
-  <input type="submit" name="submit" value="Restore" onclick="document.getElementById('data-csv').click();" />
+  <div class="row">
+    <div>
+      <label>File:</label>
+      <input type="file" name="data" id="data-upload" accept=".csv" />
+    </div>
+  </div>
+
+  <input type="submit" name="submit" value="Backup" onclick="document.getElementById('data-upload').required=false" />
+  <input type="submit" name="submit" value="Restore" onclick="document.getElementById('data-upload').required=true" />
 </form>
 
 <script>
@@ -69,7 +75,6 @@
     nSelectedText: "Selected",
     allSelectedText: "All Selected",
   });
-
   function redirect() {
     setTimeout(() => {
       window.location.href = "{{ url_for('root.home.index') }}";
@@ -107,10 +112,5 @@
   }
   typeSelect.addEventListener("change", dates);
   document.addEventListener("DOMContentLoaded", dates);
-
-  document.getElementById('data-csv').addEventListener('change', function() {
-    document.getElementById('restore-form').submit();
-  });
-
 </script>
 {% endblock %}

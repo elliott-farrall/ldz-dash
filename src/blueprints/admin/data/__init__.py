@@ -54,13 +54,13 @@ def backup() -> View:
                     table.to_csv(tmp.name, index=False)
                     return Response(tmp.read(), mimetype="text/csv", headers={"Content-Disposition": "attachment;filename=backup.csv"})
             case "Restore":
-                file = request.files['data-csv']
+                file = request.files["data"]
                 with NamedTemporaryFile(dir=".", suffix=".csv") as tmp:
                     file.save(tmp.name)
                     table = read_csv(tmp.name)
 
-                for user in table['User'].unique():
-                    user_table = table[table['User'] == user].drop(columns=['User'])
+                for user in table["User"].unique():
+                    user_table = table[table["User"] == user].drop(columns=["User"])
                     data = Data(category, subcategory, user)
                     data._table = user_table
                     data._table.to_csv(data.path, index=False)
