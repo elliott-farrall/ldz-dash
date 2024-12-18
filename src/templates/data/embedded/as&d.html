@@ -2,12 +2,14 @@
 <script>
   const form = document.querySelector("form");
 </script>
+
 <div class="row">
   <div>
     <label>Date:</label>
     <input name="Date" type="date" required />
   </div>
 </div>
+
 <div class="row">
   <div>
     <label>Session Time:</label>
@@ -18,18 +20,21 @@
     <input name="Preparation Time" type="number" min="0" step="0.25" required />
   </div>
 </div>
+
 <div class="row">
   <div>
     <label>Workshop Name:</label>
     <input name="Workshop Name" type="text" required />
   </div>
 </div>
+
 <div class="row">
   <div>
     <label>Module:</label>
     <input name="Module" type="text" required />
   </div>
 </div>
+
 <div class="row">
   <div>
     <label>Department:</label>
@@ -50,10 +55,11 @@
     </select>
   </div>
 </div>
+
 <div class="row">
   <div>
     <label>Query 1:</label>
-    <select name="Query 1" id="query1" required>
+    <select name="Query 1" required>
       <option style="display: none" disabled selected value></option>
       {% for category in topics["AS&D"] %}
       <optgroup label="{{ category }}">
@@ -66,7 +72,7 @@
   </div>
   <div>
     <label>Query 2:</label>
-    <select name="Query 2" id="query2" required>
+    <select name="Query 2" required>
       <option value="N/A">N/A</option>
       {% for category in topics["AS&D"] %}
       <optgroup label="{{ category }}">
@@ -78,6 +84,7 @@
     </select>
   </div>
 </div>
+
 <div class="row">
   <div>
     <label>Format:</label>
@@ -91,24 +98,44 @@
     <label>Location:</label>
     <select name="Location" required>
       <option style="display: none" disabled selected value></option>
+      <option style="display: none">Online</option>
       {% for location in locations %}
       <option value="{{ location }}">{{ location }}</option>
       {% endfor %}
     </select>
   </div>
+  <script>
+    const format_select = document.querySelector("select[name='Format']");
+    const location_select = document.querySelector("select[name='Location']");
+
+    format_select.addEventListener("change", () => {
+      if (format_select.value === "Online") {
+        location_select.value = "Online";
+        location_select.disabled = true;
+      } else {
+        location_select.value = "";
+        location_select.disabled = false;
+      }
+    });
+
+    form.addEventListener("submit", () => {
+      location_select.disabled = false;
+    });
+  </script>
 </div>
+
 <a>Staff:</a>
 <div class="row selector">
   <div>
     <label>LDA</label>
-    <input name="LDA" type="hidden" value="No" id="lda_hidden" />
-    <input name="LDA" type="checkbox" value="Yes" id="lda" />
+    <input name="LDA" type="hidden" value="No" />
+    <input name="LDA" type="checkbox" value="Yes" />
     <script>
-      const lda = document.getElementById("lda");
-      const lda_hidden = document.getElementById("lda_hidden");
+      const lda_checkbox = document.querySelector("input[name='LDA'][type='checkbox']");
+      const lda_hidden = document.querySelector("input[name='LDA'][type='hidden']");
 
-      form.addEventListener('submit', () => {
-        if(lda.checked) {
+      form.addEventListener("submit", () => {
+        if (lda_checkbox.checked) {
           lda_hidden.disabled = true;
         };
       });
@@ -116,14 +143,14 @@
   </div>
   <div>
     <label>LDL</label>
-    <input name="LDL" type="hidden" value="No" id="ldl_hidden" />
-    <input name="LDL" type="checkbox" value="Yes" id="ldl" />
+    <input name="LDL" type="hidden" value="No" />
+    <input name="LDL" type="checkbox" value="Yes" />
     <script>
-      const ldl = document.getElementById("ldl");
-      const ldl_hidden = document.getElementById("ldl_hidden");
+      const ldl_checkbox = document.querySelector("input[name='LDL'][type='checkbox']");
+      const ldl_hidden = document.querySelector("input[name='LDL'][type='hidden']");
 
       form.addEventListener('submit', () => {
-        if(ldl.checked) {
+        if (ldl_checkbox.checked) {
           ldl_hidden.disabled = true;
         };
       });
@@ -131,14 +158,14 @@
   </div>
   <div>
     <label>MASA</label>
-    <input name="MASA" type="hidden" value="No" id="masa_hidden" />
-    <input name="MASA" type="checkbox" value="Yes" id="masa" />
+    <input name="MASA" type="hidden" value="No" />
+    <input name="MASA" type="checkbox" value="Yes" />
     <script>
-      const masa = document.getElementById("masa");
-      const masa_hidden = document.getElementById("masa_hidden");
+      const masa_checkbox = document.querySelector("input[name='MASA'][type='checkbox']");
+      const masa_hidden = document.querySelector("input[name='MASA'][type='hidden']");
 
-      form.addEventListener('submit', () => {
-        if(masa.checked) {
+      form.addEventListener("submit", () => {
+        if (masa_checkbox.checked) {
           masa_hidden.disabled = true;
         };
       });
@@ -146,14 +173,14 @@
   </div>
   <div>
     <label>FY</label>
-    <input name="FY" type="hidden" value="No" id="fy_hidden" />
-    <input name="FY" type="checkbox" value="Yes" id="fy" />
+    <input name="FY" type="hidden" value="No" />
+    <input name="FY" type="checkbox" value="Yes" />
     <script>
-      const fy = document.getElementById("fy");
-      const fy_hidden = document.getElementById("fy_hidden");
+      const fy_checkbox = document.querySelector("input[name='FY'][type='checkbox']");
+      const fy_hidden = document.querySelector("input[name='FY'][type='hidden']");
 
-      form.addEventListener('submit', () => {
-        if(fy.checked) {
+      form.addEventListener("submit", () => {
+        if (fy_checkbox.checked) {
           fy_hidden.disabled = true;
         };
       });
@@ -161,20 +188,21 @@
   </div>
   <div>
     <label>Acad</label>
-    <input name="Acad" type="hidden" value="No" id="acad_hidden" />
-    <input name="Acad" type="checkbox" values="Yes" id="acad" />
+    <input name="Acad" type="hidden" value="No" />
+    <input name="Acad" type="checkbox" values="Yes" />
     <script>
-      const acad = document.getElementById("acad");
-      const acad_hidden = document.getElementById("acad_hidden");
+      const acad_checkbox = document.querySelector("input[name='Acad'][type='checkbox']");
+      const acad_hidden = document.querySelector("input[name='Acad'][type='hidden]");
 
-      form.addEventListener('submit', () => {
-        if(acad.checked) {
+      form.addEventListener("submit", () => {
+        if (acad_checkbox.checked) {
           acad_hidden.disabled = true;
         };
       });
     </script>
   </div>
 </div>
+
 <div class="row">
   <div>
     <label>Type:</label>
@@ -215,6 +243,7 @@
     </select>
   </div>
 </div>
+
 <div class="row">
   <div>
     <label>Resources:</label>
@@ -229,6 +258,7 @@
     </select>
   </div>
 </div>
+
 <div class="row">
   <div>
     <label>Referrals:</label>
@@ -237,8 +267,18 @@
       <option value="{{ referral }}">{{ referral }}</option>
       {% endfor %}
     </select>
+    <script>
+      $("#referrals").multiselect({
+        includeSelectAllOption: true,
+        selectAllText: "Select All",
+        nonSelectedText: "None Selected",
+        nSelectedText: "Selected",
+        allSelectedText: "All Selected",
+      });
+    </script>
   </div>
 </div>
+
 <div class="row">
   <div>
     <label>Students Expected:</label>
@@ -249,6 +289,7 @@
     <input name="Students Arrived" type="number" min="0" required />
   </div>
 </div>
+
 <div class="row">
   <div>
     <label>Notes:</label>
@@ -257,24 +298,16 @@
 </div>
 
 <script>
-  $("#referrals").multiselect({
-    includeSelectAllOption: true,
-    selectAllText: "Select All",
-    nonSelectedText: "None Selected",
-    nSelectedText: "Selected",
-    allSelectedText: "All Selected",
-  });
-
-  const query1 = document.getElementById("query1");
-  const query2 = document.getElementById("query2");
-  const notes = document.getElementById("notes");
-  const matchStrings = [
-    "Referencing",
-    "Managing information (including referencing software)",
-  ];
+  const query1 = document.querySelector("select[name='Query 1']");
+  const query2 = document.querySelector("select[name='Query 2']");
+  const notes = document.querySelector("input[name='Notes']");
 
   function checkQueries() {
-    const matches = matchStrings.some(
+    const match_strings = [
+      "Referencing",
+      "Managing information (including referencing software)",
+    ];
+    const matches = match_strings.some(
       (str) => query1.value.includes(str) || query2.value.includes(str),
     );
     notes.disabled = !matches;
