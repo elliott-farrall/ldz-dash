@@ -84,5 +84,6 @@ class Data:
     @property
     def values(self) -> list:
         table = self._table.copy()
-        table["Date"] = table["Date"].dt.date
+        if not self.empty:
+            table["Date"] = table["Date"].dt.date
         return table.fillna("").values.tolist()
