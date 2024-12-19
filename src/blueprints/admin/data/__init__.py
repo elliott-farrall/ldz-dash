@@ -21,16 +21,23 @@ def download() -> View:
         category, subcategory = request.form["category:subcategory"].split(":")
         users = request.form.getlist("users")
 
-        table = concat([Data(category, subcategory, user).table.assign(User=user) for user in users], ignore_index=True)
-        if not table.empty:
-            if not request.form["all"]:
-                table = table.loc[
-                    (table["Date"].dt.month == date.month) &
-                    (table["Date"].dt.year == date.year)
-                ]
-        table.sort_values("Date", ascending=False, inplace=True)
+        table = DataFrame()
+        for user in users:
+            with Data(category, subcategory, user) as data:
+                if not data.empty:
+                    user_table = data.table.loc[
+                        (data.table["Date"].dt.month == date.month) &
+                        (data.table["Date"].dt.year == date.year)
+                    ]
+                    user_table.insert(0, "User", user)
+                    table = concat([table, user_table], ignore_index=True)
 
-        return Response(table.to_csv(index=False), mimetype="text/csv", headers={"Content-Disposition": "attachment;filename=data.csv"})
+        if not table.empty:
+            table.sort_values("Date", ascending=False, inplace=True)
+
+        with NamedTemporaryFile(dir=".", suffix=".csv") as tmp:
+            table.to_csv(tmp.name, index=False)
+            return Response(tmp.read(), mimetype="text/csv", headers={"Content-Disposition": "attachment;filename=data.csv"})
 
     return render_template(join(TEMPLATES_DIR, "data.html"))
 
