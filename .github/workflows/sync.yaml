@@ -1,0 +1,35 @@
+name: Sync
+
+on:
+  push:
+    branches: [testing]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: production
+          fetch-depth: 0
+
+      - name: Reset update branch
+        run: |
+          git fetch origin testing:testing
+          git reset --hard testing
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: production-update
+          title: testing -> production
+          body: |
+            This PR updates the production branch to match the testing branch.
+
+
