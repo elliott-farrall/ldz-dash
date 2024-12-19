@@ -129,7 +129,7 @@ class Users(SQLAlchemy):
         if not user:
             raise UserException("Invalid user!")
 
-        if form["password_new"] is not form["password_check"]:
+        if form["password_new"] != form["password_check"]:
             raise UserException("Passwords do not match!")
 
         user.password = generate_password_hash(form["password_new"])
