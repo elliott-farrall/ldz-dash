@@ -31,5 +31,3 @@ jobs:
           title: testing -> production
           body: |
             This PR updates the production branch to match the testing branch.
-
-

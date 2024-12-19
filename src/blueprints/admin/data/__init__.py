@@ -2,7 +2,9 @@ from datetime import datetime
 from os.path import join
 from tempfile import NamedTemporaryFile
 
-from flask import Blueprint, Response, jsonify, render_template, request, redirect, url_for
+from flask import (
+    Blueprint, Response, jsonify, redirect, render_template, request, url_for,
+)
 from pandas import DataFrame, concat, read_csv
 
 from src.data import Data
