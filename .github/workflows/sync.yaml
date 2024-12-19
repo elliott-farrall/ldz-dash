@@ -2,34 +2,20 @@ name: Sync
 
 on:
   push:
-    branches: [testing]
+    branches: [production]
 
 jobs:
   sync:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
-      pull-requests: write
-
     steps:
-      - name: Checkout repository
+      - name: Checkout production branch
         uses: actions/checkout@v4
         with:
           ref: production
-          fetch-depth: 0
 
-      - name: Reset update branch
+      - name: Reset testing branch to match production
         run: |
-          git fetch origin testing:testing
-          git reset --hard testing
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          branch: production-update
-          title: testing -> production
-          body: |
-            This PR updates the production branch to match the testing branch.
-
-
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B testing
+          git push origin testing --force
