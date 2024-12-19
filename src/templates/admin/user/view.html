@@ -3,10 +3,11 @@
   <thead>
     <tr>
       {% for header in headers %}
-      <th>{{ header }}</th>
+      <th>{{ header|capitalize }}</th>
       {% endfor %}
     </tr>
   </thead>
+
   <tbody>
     {% for row in table %}
     <tr onclick="edit(this)">
@@ -14,23 +15,19 @@
       <td>{{ entry }}</td>
       {% endfor %}
     </tr>
+    <script>
+      function edit(row) {
+        const idx = row.rowIndex - 1;
+        let url = "{{ url_for('.edit', idx=0) }}";
+        url = url.replace("0", idx);
+        window.location.replace(url);
+      }
+    </script>
     {% endfor %}
-    <tr onclick="add()">
+
+    <tr onclick='window.location.replace("{{ url_for(".add") }}")'>
       <td colspan="100%">+</td>
     </tr>
   </tbody>
 </table>
-
-<script>
-  function add() {
-    let url = "{{ url_for('.add') }}";
-    window.location.replace(url);
-  }
-  function edit(row) {
-    const idx = row.rowIndex - 1;
-    let url = "{{ url_for('.edit', idx=0) }}";
-    url = url.replace("0", idx);
-    window.location.replace(url);
-  }
-</script>
 {% endblock %}

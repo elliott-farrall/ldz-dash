@@ -32,7 +32,11 @@
 </form>
 
 <h1>Backup & Restore</h1>
-<form method="POST" action="{{ url_for('.backup') }}" enctype="multipart/form-data">
+<form
+  method="POST"
+  action="{{ url_for('.backup') }}"
+  enctype="multipart/form-data"
+>
   <div class="row">
     <div>
       <label>Type:</label>
@@ -56,8 +60,18 @@
     </div>
   </div>
 
-  <input type="submit" name="submit" value="Backup" onclick="document.getElementById('data-upload').required=false" />
-  <input type="submit" name="submit" value="Restore" onclick="document.getElementById('data-upload').required=true" />
+  <input
+    type="submit"
+    name="submit"
+    value="Backup"
+    onclick="document.getElementById('data-upload').required=false"
+  />
+  <input
+    type="submit"
+    name="submit"
+    value="Restore"
+    onclick="document.getElementById('data-upload').required=true"
+  />
 </form>
 
 <script>

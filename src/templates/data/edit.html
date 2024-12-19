@@ -7,6 +7,7 @@
       {% endfor %}
     </tr>
   </thead>
+
   <tbody>
     {% for row in table %}
     <tr onclick="remove(this)">
@@ -14,17 +15,16 @@
       <td>{{ entry }}</td>
       {% endfor %}
     </tr>
+    <script>
+      function remove(row) {
+        const idx = row.rowIndex - 1;
+        let url =
+          "{{ url_for('.remove', category=category, subcategory=subcategory, idx=0) }}";
+        url = url.replace("0", idx);
+        window.location.replace(url);
+      }
+    </script>
     {% endfor %}
   </tbody>
 </table>
-
-<script>
-  function remove(row) {
-    const idx = row.rowIndex - 1;
-    let url =
-      "{{ url_for('.remove', category=category, subcategory=subcategory, idx=0) }}";
-    url = url.replace("0", idx);
-    window.location.replace(url);
-  }
-</script>
 {% endblock %}

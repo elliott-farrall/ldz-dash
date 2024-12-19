@@ -3,6 +3,7 @@
   <div id="group_left">
     <div class="button" onclick="openSide()">&#9776;</div>
   </div>
+
   <div id="group_right">
     {% if current_user.admin %}
     <div class="menu">
@@ -15,6 +16,7 @@
       </div>
     </div>
     {% endif %}
+
     <div class="menu">
       <div class="button">{{ current_user.username }} &#x25BC;</div>
       <div class="content">
@@ -37,11 +39,7 @@
     >{{ subcategory|upper }}</a
   >
   {% endfor %} {% endfor %}
-</div>
-
-<div id="main">{% block main %}{% endblock %}</div>
-
-<script>
+  <script>
   const sidenav = document.getElementsByClassName("sidenav")[0];
   function openSide() {
     sidenav.classList.add("sidenav-open");
@@ -50,4 +48,7 @@
     sidenav.classList.remove("sidenav-open");
   }
 </script>
+</div>
+
+<div id="main">{% block main %}{% endblock %}</div>
 {% endblock %}

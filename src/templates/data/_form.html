@@ -9,12 +9,12 @@
   <input
     value="Edit"
     type="button"
-    onclick='window.location="{{ url_for('.edit', category=category, subcategory=subcategory) }}"'
+    onclick='window.location="{{ url_for(".edit", category=category, subcategory=subcategory) }}"'
   />
 </form>
 
 <script>
-  const date_select = document.getElementsByName("Date")[0];
+  const date_select = document.querySelector('input[type="date"]');
   date_select.valueAsDate = new Date();
 </script>
 {% endblock %}

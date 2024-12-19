@@ -11,13 +11,12 @@
   <input
     value="{% if admin %}Demote{% else %}Promote{% endif %}"
     type="button"
-    onclick='window.location="{{ url_for('.change', idx=idx) }}"'
+    onclick='window.location="{{ url_for(".change", idx=idx) }}"'
   />
   <input
     value="Remove"
     type="button"
-    onclick='window.location="{{ url_for('.remove', idx=idx) }}"'
+    onclick='window.location="{{ url_for(".remove", idx=idx) }}"'
   />
 </form>
-{% include "flash.html" %}
-{% endblock %}
+{% include "flash.html" %} {% endblock %}

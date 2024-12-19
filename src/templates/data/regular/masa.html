@@ -113,13 +113,17 @@
     <input name="Appointment" type="hidden" value="No" />
     <input name="Appointment" type="checkbox" value="Yes" />
     <script>
-      const appointment_checkbox = document.querySelector("input[name='Appointment'][type='checkbox']");
-      const appointment_hidden = document.querySelector("input[name='Appointment'][type='hidden']");
+      const appointment_checkbox = document.querySelector(
+        "input[name='Appointment'][type='checkbox']",
+      );
+      const appointment_hidden = document.querySelector(
+        "input[name='Appointment'][type='hidden']",
+      );
 
       form.addEventListener("submit", () => {
         if (appointment_checkbox.checked) {
           appointment_hidden.disabled = true;
-        };
+        }
       });
     </script>
   </div>
@@ -133,17 +137,21 @@
     </select>
   </div>
   <script>
-    const attendance_select = document.querySelector("select[name='Attendance']");
+    const attendance_select = document.querySelector(
+      "select[name='Attendance']",
+    );
 
     appointment_checkbox.addEventListener("change", () => {
       if (appointment_checkbox.checked) {
         attendance_select.disabled = false;
         attendance_select.value = "Attended";
-        attendance_select.querySelector("option[value='N/A']").style.display = "none";
+        attendance_select.querySelector("option[value='N/A']").style.display =
+          "none";
       } else {
         attendance_select.disabled = true;
         attendance_select.value = "N/A";
-        attendance_select.querySelector("option[value='N/A']").style.display = "block";
+        attendance_select.querySelector("option[value='N/A']").style.display =
+          "block";
       }
     });
 
@@ -163,13 +171,17 @@
     <input name="Project" type="hidden" value="No" />
     <input name="Project" type="checkbox" value="Yes" />
     <script>
-      const project_checkbox = document.querySelector("input[name='Project'][type='checkbox']");
-      const project_hidden = document.querySelector("input[name='Project'][type='hidden']");
+      const project_checkbox = document.querySelector(
+        "input[name='Project'][type='checkbox']",
+      );
+      const project_hidden = document.querySelector(
+        "input[name='Project'][type='hidden']",
+      );
 
       form.addEventListener("submit", () => {
         if (project_checkbox.checked) {
           project_hidden.disabled = true;
-        };
+        }
       });
     </script>
   </div>
