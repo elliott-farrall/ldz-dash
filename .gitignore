@@ -9,6 +9,5 @@ __pycache__
 
 data/**/*.csv
 data/**/*.sqlite
-data/**/*.zip
 USERS
 *.log
