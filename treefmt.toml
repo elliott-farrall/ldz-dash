@@ -1,0 +1,84 @@
+excludes = [".editorconfig", "*.ini"]
+
+[formatter.actionlint]
+command = "actionlint"
+excludes = []
+includes = [".github/workflows/*.yml", ".github/workflows/*.yaml"]
+options = []
+
+[formatter.beautysh]
+command = "beautysh"
+excludes = []
+includes = ["*.sh"]
+options = ["-i", "2"]
+
+[formatter.isort]
+command = "isort"
+excludes = []
+includes = ["*.py", "*.pyi"]
+options = ["--profile", "django"]
+
+[formatter.jsonfmt]
+command = "jsonfmt"
+excludes = []
+includes = ["*.json"]
+options = ["-w"]
+
+[formatter.mdformat]
+command = "mdformat"
+excludes = []
+includes = ["*.md"]
+options = []
+
+[formatter.prettier]
+command = "prettier"
+excludes = []
+includes = [
+  "*.cjs",
+  "*.css",
+  "*.html",
+  "*.js",
+  "*.json",
+  "*.json5",
+  "*.jsx",
+  "*.md",
+  "*.mdx",
+  "*.mjs",
+  "*.scss",
+  "*.ts",
+  "*.tsx",
+  "*.vue",
+  "*.yaml",
+  "*.yml",
+]
+options = ["--write"]
+
+[formatter.ruff-check]
+command = "ruff"
+excludes = []
+includes = ["*.py", "*.pyi"]
+options = ["check", "--fix"]
+
+[formatter.ruff-format]
+command = "ruff"
+excludes = []
+includes = ["*.py", "*.pyi"]
+options = ["format"]
+
+[formatter.shfmt]
+command = "shfmt"
+excludes = []
+includes = ["*.sh", "*.bash", "*.envrc", "*.envrc.*"]
+options = ["-s", "-w", "-i", "2"]
+
+[formatter.taplo]
+command = "taplo"
+excludes = []
+includes = ["*.toml"]
+options = ["format"]
+
+[formatter.yamlfmt]
+command = "yamlfmt"
+excludes = []
+includes = ["*.yaml", "*.yml"]
+options = ["-formatter", "retain_line_breaks_single=true"]

@@ -1,7 +1,6 @@
 .env
 .venv
-.direnv
-.pre-commit-config.yaml
+.devbox
 
 __pycache__
 .mypy_cache

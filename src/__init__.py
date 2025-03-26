@@ -52,6 +52,9 @@ class App(Flask):
 
 app = App()
 
-if __name__ == "__main__":
+def main() -> None:
     logging.basicConfig(level=logging.DEBUG, filename="flask.log")
     app.run()
+
+if __name__ == "__main__":
+    main()
