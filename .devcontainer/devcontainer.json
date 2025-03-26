@@ -1,4 +1,23 @@
 {
-  "name": "Nix Container",
-  "image": "ghcr.io/xtruder/nix-devcontainer:latest"
+  "name": "Devbox Remote Container",
+  "build": {
+    "dockerfile": "./Dockerfile",
+    "context": ".."
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.detectLocale": "off"
+      },
+      "extensions": [
+        "jetpack-io.devbox",
+        "ms-python.python",
+        "zeshuaro.vscode-python-poetry",
+        "charliermarsh.ruff",
+        "ibecker.treefmt-vscode",
+        "vivaxy.vscode-conventional-commits"
+      ]
+    }
+  },
+  "remoteUser": "devbox"
 }
