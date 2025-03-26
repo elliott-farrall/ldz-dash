@@ -189,6 +189,26 @@
 
 <div class="row">
   <div>
+    <label>Referrals:</label>
+    <select name="Referrals" id="referrals" multiple>
+      {% for referral in referrals %}
+      <option value="{{ referral }}">{{ referral }}</option>
+      {% endfor %}
+    </select>
+    <script>
+      $("#referrals").multiselect({
+        includeSelectAllOption: true,
+        selectAllText: "Select All",
+        nonSelectedText: "None Selected",
+        nSelectedText: "Selected",
+        allSelectedText: "All Selected",
+      });
+    </script>
+  </div>
+</div>
+
+<div class="row">
+  <div>
     <label>Notes:</label>
     <input name="Notes" type="text" disabled />
     <script>
