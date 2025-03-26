@@ -2,9 +2,8 @@ from datetime import datetime
 from os.path import join
 from tempfile import NamedTemporaryFile
 
-from flask import (
-    Blueprint, Response, jsonify, redirect, render_template, request, url_for,
-)
+from flask import Blueprint, Response, jsonify, redirect, render_template, request, url_for
+
 from pandas import DataFrame, concat, read_csv
 
 from src.data import Data
@@ -14,6 +13,7 @@ from src.view import View, admin_required
 TEMPLATES_DIR = join("admin", "data")
 
 data = Blueprint("data", __name__, url_prefix="/data")
+
 
 @data.route("/", methods=["GET", "POST"])
 @admin_required
@@ -27,10 +27,7 @@ def download() -> View:
         for user in users:
             with Data(category, subcategory, user) as data:
                 if not data.empty:
-                    user_table = data.table.loc[
-                        (data.table["Date"].dt.month == date.month) &
-                        (data.table["Date"].dt.year == date.year)
-                    ]
+                    user_table = data.table.loc[(data.table["Date"].dt.month == date.month) & (data.table["Date"].dt.year == date.year)]
                     user_table.insert(0, "User", user)
                     table = concat([table, user_table], ignore_index=True)
 
@@ -42,6 +39,7 @@ def download() -> View:
             return Response(tmp.read(), mimetype="text/csv", headers={"Content-Disposition": "attachment;filename=data.csv"})
 
     return render_template(join(TEMPLATES_DIR, "data.html"))
+
 
 @data.route("/backup", methods=["POST"])
 @admin_required
@@ -75,6 +73,7 @@ def backup() -> View:
                     data._table.to_csv(data.path, index=False)
 
     return redirect(url_for(".download"))
+
 
 @data.route("/dates/<category>/<subcategory>")
 @admin_required

@@ -11,10 +11,12 @@ TEMPLATES_DIR = "home"
 
 home = Blueprint("home", __name__, url_prefix="/home")
 
+
 @home.route("/")
 @login_required
 def index() -> View:
     return render_template(join(TEMPLATES_DIR, "index.html"))
+
 
 @home.route("/charts/<category>/<subcategory>/<int:year>")
 @login_required

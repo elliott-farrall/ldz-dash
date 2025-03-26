@@ -9,6 +9,7 @@ TEMPLATES_DIR = "user"
 
 user = Blueprint("user", __name__, url_prefix="/user")
 
+
 @user.route("/settings", methods=["GET", "POST"])
 @login_required
 def settings() -> View:

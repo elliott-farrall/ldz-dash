@@ -9,6 +9,7 @@ TEMPLATES_DIR = "data"
 
 data = Blueprint("data", __name__, url_prefix="/data")
 
+
 @data.route("/<category>/<subcategory>", methods=["GET", "POST"])
 @login_required
 def add(category: str, subcategory: str) -> View:
@@ -19,11 +20,13 @@ def add(category: str, subcategory: str) -> View:
 
     return render_template(join(TEMPLATES_DIR, category, subcategory + ".html"), category=category, subcategory=subcategory)
 
+
 @data.route("/<category>/<subcategory>/edit")
 @login_required
 def edit(category: str, subcategory: str) -> View:
     with Data(category, subcategory) as data:
         return render_template(join(TEMPLATES_DIR, "edit.html"), category=category, subcategory=subcategory, headers=data.columns, table=data.values)
+
 
 @data.route("/<category>/<subcategory>/remove/<int:idx>", methods=["GET", "POST"])
 @login_required

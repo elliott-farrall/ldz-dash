@@ -16,4 +16,5 @@ class Login(LoginManager):
         def load_user(user_id: str) -> Optional[User]:
             return User.query.get(int(user_id))
 
+
 login = Login()

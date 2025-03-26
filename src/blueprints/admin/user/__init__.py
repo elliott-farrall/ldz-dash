@@ -9,10 +9,12 @@ TEMPLATES_DIR = join("admin", "user")
 
 user = Blueprint("user", __name__, url_prefix="/user")
 
+
 @user.route("/")
 @admin_required
 def view() -> View:
     return render_template(join(TEMPLATES_DIR, "view.html"), headers=users.columns, table=users.values)
+
 
 @user.route("/add", methods=["GET", "POST"])
 @admin_required
@@ -26,6 +28,7 @@ def add() -> View:
             return redirect(url_for(".view"))
 
     return render_template(join(TEMPLATES_DIR, "add.html"))
+
 
 @user.route("/edit/<int:idx>", methods=["GET", "POST"])
 @admin_required
@@ -44,12 +47,14 @@ def edit(idx: int) -> View:
 
     return render_template(join(TEMPLATES_DIR, "edit.html"), idx=idx, admin=user.admin)
 
+
 @user.route("/change/<int:idx>", methods=["GET", "POST"])
 @admin_required
 @confirm_required
 def change(idx: int) -> View:
     users.change_admin(idx)
     return redirect(url_for(".view"))
+
 
 @user.route("/remove/<int:idx>", methods=["GET", "POST"])
 @admin_required

@@ -40,14 +40,14 @@
   >
   {% endfor %} {% endfor %}
   <script>
-  const sidenav = document.getElementsByClassName("sidenav")[0];
-  function openSide() {
-    sidenav.classList.add("sidenav-open");
-  }
-  function closeSide() {
-    sidenav.classList.remove("sidenav-open");
-  }
-</script>
+    const sidenav = document.getElementsByClassName("sidenav")[0];
+    function openSide() {
+      sidenav.classList.add("sidenav-open");
+    }
+    function closeSide() {
+      sidenav.classList.remove("sidenav-open");
+    }
+  </script>
 </div>
 
 <div id="main">{% block main %}{% endblock %}</div>

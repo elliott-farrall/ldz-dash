@@ -18,10 +18,12 @@ root.register_blueprint(data)
 root.register_blueprint(home)
 root.register_blueprint(user)
 
+
 @root.route("/")
 @root.route("/index")
 def index() -> View:
     return redirect(url_for("root.home.index"))
+
 
 @root.route("/sw.js")
 def service_worker() -> View:
