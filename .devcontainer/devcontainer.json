@@ -15,7 +15,9 @@
         "zeshuaro.vscode-python-poetry",
         "charliermarsh.ruff",
         "ibecker.treefmt-vscode",
-        "vivaxy.vscode-conventional-commits"
+        "vivaxy.vscode-conventional-commits",
+        "samuelcolvin.jinjahtml",
+        "tamasfe.even-better-toml"
       ]
     }
   },
