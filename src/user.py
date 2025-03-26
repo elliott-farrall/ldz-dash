@@ -4,9 +4,7 @@ from dataclasses import dataclass
 from shutil import rmtree
 from typing import TYPE_CHECKING, Union
 
-from flask_login import (  # type: ignore
-    UserMixin, current_user, login_user, logout_user,
-)
+from flask_login import UserMixin, current_user, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
 from pandas import DataFrame, read_sql
 from werkzeug.datastructures import ImmutableMultiDict
@@ -143,12 +141,14 @@ class Users(SQLAlchemy):
         user.admin = not user.admin
         self.session.commit()
 
+
 users = Users()
 
 if TYPE_CHECKING:
     from flask_sqlalchemy.model import Model
 else:
     Model = users.Model
+
 
 @dataclass
 class User(Model, UserMixin):
@@ -161,6 +161,7 @@ class User(Model, UserMixin):
         if not isinstance(other, User):
             return NotImplemented
         return self.username == other.username
+
 
 class UserException(Exception):
     def __init__(self, message: str = "Unknown error!") -> None:

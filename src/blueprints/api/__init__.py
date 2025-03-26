@@ -8,6 +8,7 @@ from src.view import View
 
 api = Blueprint("api", __name__, url_prefix="/api")
 
+
 @api.route("/update", methods=["POST"])
 def update() -> View:
     secret_key = dotenv_values()["SECRET_KEY"]
@@ -31,6 +32,7 @@ def update() -> View:
             return Response(status=202)
     else:
         return Response(status=400)
+
 
 @api.route("/version")
 def version() -> View:

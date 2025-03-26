@@ -9,6 +9,7 @@ TEMPLATES_DIR = "auth"
 
 auth = Blueprint("auth", __name__, url_prefix="/auth")
 
+
 @auth.route("/login", methods=["GET", "POST"])
 def login() -> View:
     if current_user:

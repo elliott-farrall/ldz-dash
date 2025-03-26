@@ -50,11 +50,14 @@ class App(Flask):
                     "topics": load(topics_file),
                 }
 
+
 app = App()
+
 
 def main() -> None:
     logging.basicConfig(level=logging.DEBUG, filename="flask.log")
     app.run()
+
 
 if __name__ == "__main__":
     main()

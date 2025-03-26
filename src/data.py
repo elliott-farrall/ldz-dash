@@ -15,11 +15,7 @@ DATA_TEMPLATES = TEMPLATES_DIR / "data"
 
 
 class Data:
-    categories = {
-        dir.name: [path.stem for path in dir.iterdir()]
-        for dir in (DATA_TEMPLATES).iterdir()
-        if dir.is_dir()
-    }
+    categories = {dir.name: [path.stem for path in dir.iterdir()] for dir in (DATA_TEMPLATES).iterdir() if dir.is_dir()}
 
     def __init__(self, category: str, subcategory: str, username: Optional[str] = None) -> None:
         self.category = category
@@ -53,7 +49,7 @@ class Data:
         row_dict = dict(row.lists())
         for key, values in row_dict.items():
             if len(values) > 1:
-                row_dict[key] = [' | '.join(values)]
+                row_dict[key] = [" | ".join(values)]
 
         self._table = concat([DataFrame(row_dict, index=[0]), self._table], ignore_index=True)
         self._table["Date"] = to_datetime(self._table["Date"])
