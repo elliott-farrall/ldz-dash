@@ -62,6 +62,14 @@
       "Understanding Research Papers",
       "Other"
     ],
-    "Software": ["Excel", "GraphPad", "Jamovi", "Matlab", "R", "SPSS", "Other"]
+    "Software": [
+      "Excel",
+      "GraphPad",
+      "Jamovi",
+      "Matlab",
+      "R",
+      "SPSS",
+      "Other"
+    ]
   }
 }

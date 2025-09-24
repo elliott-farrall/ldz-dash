@@ -3,7 +3,6 @@ from os.path import join
 from tempfile import NamedTemporaryFile
 
 from flask import Blueprint, Response, jsonify, redirect, render_template, request, url_for
-
 from pandas import DataFrame, concat, read_csv
 
 from src.data import Data
