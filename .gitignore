@@ -1,12 +1,12 @@
 .env
 .venv
-.devbox
+.direnv
+.pre-commit-config.yaml
 
 __pycache__
 .mypy_cache
 .ruff_cache
 
-data/**/*.csv
-data/**/*.sqlite
+data/**
 USERS
 *.log
